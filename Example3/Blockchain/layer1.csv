@@ -1,0 +1,41 @@
+index,hash,time,name,code,hash1 
+1,0,2023-12-14 15:49:46.270,first,,0
+2,8f03e459f520c19065e6583df84cd108040634f99b56c1df8edb2d3aa8a1ec6b,2023-12-16 04:08:12.828836,First message,"messagebox.showinfo(""Hello World"")",0
+3,8d3c0c70b90ffb585c492247903c732a5a817c0a99ee259ff554fe311e2023e6,2023-12-16 05:27:56.015617,Target smart contract,"#Codes related to fetching data from an external source
+# this is the module that helps us make API calls (requests)
+import requests 
+# this module helps us print all aspects of the data returned from API call
+from pprint import pprint
+# to make a different API call, just change the url below to a API endpoint. Two examples, one pokemon, one for longitude and latitude
+# response = requests.get(""http://api.open-notify.org/iss-now.json"")
+response = requests.get(""https://pokeapi.co/api/v2/pokemon/ditto"")
+#pprint(vars(response))
+
+#Codes related to storage in the second layer of the blockchain
+with open('D:/Blockchain/layer2.csv', 'r') as csv:
+    last_index = [[x.strip() for x in line.strip().split(',')] for line in csv.readlines()][-1][0]   
+    csv.close()
+        
+with open('D:/Blockchain/layer2.csv', 'r') as csv1:
+    last_hash1 = [[x.strip() for x in line.strip().split(',')] for line in csv1.readlines()][-1][1]   
+    csv1.close() 
+
+index1 = int(last_index) + 1
+hash1 = last_hash1
+    
+data1 = vars(response)
+data2 = ""https://pokeapi.co/api/v2/pokemon/ditto""
+data3 = ""pokeapi.co""
+data4 = ""From a smart contract""
+
+newdata5 = cText3.get(1.0, ""end-1c"")
+
+hash_string = str(index1) + str(date.datetime.now()) + str(data1) + str(data2) +  str(data3) + str(data4) + str(newdata5) + str(hash1)
+new_hash= hashlib.sha256(hash_string.encode()).hexdigest()
+
+list_data=[str(index1),str(new_hash),str(date.datetime.now()),str(data1),str(data2),str(data3),str(data4),str(newdata5), str(hash1)]
+
+with open('D:/Blockchain/layer2.csv', 'a', newline='') as f_object:  
+    writer_object = writer(f_object)
+    writer_object.writerow(list_data)  
+    f_object.close()",8f03e459f520c19065e6583df84cd108040634f99b56c1df8edb2d3aa8a1ec6b
